@@ -1,6 +1,6 @@
 /* ── CSS Custom Properties ─────────────────────────────────────────────── */
 :root {
-  --font-heading: 'Gabriela', serif;
+  --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
 
   --bg-primary: #ffffff;
@@ -189,4 +189,10 @@ h1, h2, h3, h4 {
   .container {
     padding: 0 18px;
   }
+}
+
+/* Ensure page height matches design specification */
+html, body {
+  min-height: 6665px;
+  width: 100%;
 }

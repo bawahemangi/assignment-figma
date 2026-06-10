@@ -67,6 +67,21 @@ const RedTriangle = ({ className, style }) => (
   </svg>
 );
 
+// Red rotated rectangle shape (Figma Rectangle, #FF7171)
+const RedRectangle = ({ className, style }) => (
+  <div
+    className={className}
+    style={{
+      width: "160px",
+      height: "160px",
+      backgroundColor: "#FF7171",
+      transform: "rotate(15deg)",
+      ...style
+    }}
+    aria-hidden="true"
+  />
+);
+
 // Red loop/scribble decorative path
 const RedLoop = ({ className, style }) => (
   <svg
@@ -85,6 +100,32 @@ const RedLoop = ({ className, style }) => (
       fill="none"
     />
   </svg>
+);
+
+// Red and black double loops on the left edge of Hero
+const HeroLeftSquiggles = () => (
+  <div style={{ position: "absolute", left: 0, top: "220px", zIndex: 1, pointerEvents: "none" }}>
+    {/* Red double-loop squiggle */}
+    <svg width="100" height="260" viewBox="0 0 100 260" fill="none" style={{ position: "absolute", left: "-15px", top: "-15px" }}>
+      <path
+        d="M 0 20 C 55 20, 85 70, 42 110 C 12 140, 85 170, 42 210 C 15 230, 5 240, 0 250"
+        stroke="#FF7171"
+        strokeWidth="3.2"
+        strokeLinecap="round"
+        fill="none"
+      />
+    </svg>
+    {/* Black double-loop squiggle */}
+    <svg width="100" height="260" viewBox="0 0 100 260" fill="none" style={{ position: "absolute", left: "-10px", top: "0px" }}>
+      <path
+        d="M 0 20 C 55 20, 85 70, 42 110 C 12 140, 85 170, 42 210 C 15 230, 5 240, 0 250"
+        stroke="#0e0d12"
+        strokeWidth="3.2"
+        strokeLinecap="round"
+        fill="none"
+      />
+    </svg>
+  </div>
 );
 
 // Decorative wavy SVG lines between sections
@@ -275,6 +316,9 @@ function HeroSection() {
 
   return (
     <section id="home" style={{ paddingTop: "80px", paddingBottom: "60px", position: "relative" }}>
+      {/* Hero left vertical loops */}
+      <HeroLeftSquiggles />
+
       {/* Purple ellipse decoration (Figma Ellipse 736: 155.76×155.76px, #934CEC) */}
       <div className="purple-ellipse-hero" aria-hidden="true" />
 
@@ -294,7 +338,7 @@ function HeroSection() {
           <br />
           the{" "}
           <span className="capsule-green">status</span>{" "}
-          Quo with
+          quo with
         </h1>
 
         {/* Subheading */}
@@ -355,41 +399,66 @@ function HeroSection() {
   );
 }
 
-
-/* ── Tomorrow Section ────────────────────────────────────────────────────── */
+/* ── Features Wrapper: Tomorrow + Progress (Figma: Vertical, gap 170px) ─── */
 function TomorrowSection() {
   return (
-    <section id="studio" style={{ padding: "90px 0" }}>
-      <div className="container" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "64px" }}>
-        {/* Text Column */}
-        <div style={{ flex: "1 1 380px" }}>
-          <h2 style={{ fontSize: "clamp(1.75rem, 4vw, 2.7rem)", marginBottom: "24px", letterSpacing: "-0.8px", lineHeight: 1.25, color: "#0e0d12" }}>
+    <section
+      id="studio"
+      className="features-section-tomorrow"
+      style={{ width: "100%", display: "flex", alignItems: "center" }}
+    >
+      {/* Horizontal layout: gap 262px from Figma */}
+      <div
+        className="features-tomorrow-container"
+      >
+        {/* LEFT: Text Column */}
+        <div className="features-tomorrow-text">
+          <h2
+            style={{
+              fontSize: "clamp(1.6rem, 3.2vw, 2.5rem)",
+              marginBottom: "20px",
+              letterSpacing: "-0.5px",
+              lineHeight: 1.22,
+              color: "#0e0d12",
+              fontFamily: "var(--font-heading)",
+            }}
+          >
             <span className="highlight-container">
               Tomorrow
               <YellowUnderline />
             </span>{" "}
-            should <br />
+            should{" "}<br />
             be better than{" "}
             <span className="capsule-green">today</span>
           </h2>
-          <p style={{ color: "#6b6873", fontSize: "0.93rem", lineHeight: 1.75, marginBottom: "36px", maxWidth: "390px" }}>
-            We are a team of strategists, designers, communicators, researchers, Together, we believe that progress only happens when you refuse to play things safe.
+          <p
+            style={{
+              color: "#6b6873",
+              fontSize: "0.88rem",
+              lineHeight: 1.75,
+              marginBottom: "28px",
+              maxWidth: "330px",
+            }}
+          >
+            We are a team of strategists, designers communicators, researchers.
+            Togeather, we belive that progress only hghappens when you refuse
+            to play things safe.
           </p>
           <a href="#" id="tomorrow-read-more" className="read-more-link">
             Read more <ThinArrowRight />
           </a>
         </div>
 
-        {/* Image Column */}
-        <div style={{ flex: "1 1 380px", display: "flex", justifyContent: "center", position: "relative", minHeight: "360px" }}>
-          {/* Pink radial glow */}
+        {/* RIGHT: Image Column with pink glow + red rectangle */}
+        <div className="features-tomorrow-image-wrap">
+          {/* Pink radial blur background */}
           <div className="pink-blur-bg" aria-hidden="true" />
-          {/* Red triangle decoration (Figma Polygon 1: 274×267px) */}
-          <RedTriangle className="red-triangle-tomorrow" />
-          {/* Circle image */}
-          <div className="circle-img-wrap">
+          {/* Red rectangle (Figma Polygon/Rectangle, #FF7171) */}
+          <RedRectangle className="red-rect-tomorrow" />
+          {/* Circular image (Figma Ellipse 734: 600x600px) */}
+          <div className="circle-img-wrap features-tomorrow-image">
             <img
-              src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=600&h=600&q=80"
+              src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=700&h=700&q=80"
               alt="Team collaborating in a modern office meeting"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
@@ -403,33 +472,62 @@ function TomorrowSection() {
 /* ── Progress Section ────────────────────────────────────────────────────── */
 function ProgressSection() {
   return (
-    <section id="services" style={{ padding: "90px 0" }}>
-      <div className="container" style={{ display: "flex", flexWrap: "wrap-reverse", alignItems: "center", gap: "64px" }}>
-        {/* Image Column */}
-        <div style={{ flex: "1 1 380px", display: "flex", justifyContent: "center", position: "relative", minHeight: "360px" }}>
+    <section
+      id="services"
+      className="features-section-progress"
+      style={{ width: "100%", display: "flex", alignItems: "center" }}
+    >
+      {/* Horizontal layout: gap 290px from Figma */}
+      <div
+        className="features-progress-container"
+      >
+        {/* LEFT: Image Column with two red triangles */}
+        <div className="features-progress-image-wrap">
+          {/* Small top-left triangle */}
           <RedTriangle className="triangle-progress-1" />
+          {/* Large bottom-right triangle */}
           <RedTriangle className="triangle-progress-2" />
-          <div className="circle-img-wrap">
+          {/* Circular image (Figma Ellipse 734: 600x600px) */}
+          <div className="circle-img-wrap features-progress-image">
             <img
-              src="https://images.unsplash.com/photo-1531535934202-f0d44431ded6?auto=format&fit=crop&w=600&h=600&q=80"
+              src="https://images.unsplash.com/photo-1531535934202-f0d44431ded6?auto=format&fit=crop&w=700&h=700&q=80"
               alt="Person working on laptop in a collaborative space"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>
         </div>
 
-        {/* Text Column */}
-        <div style={{ flex: "1 1 380px" }}>
-          <h2 style={{ fontSize: "clamp(1.75rem, 4vw, 2.7rem)", marginBottom: "24px", letterSpacing: "-0.8px", lineHeight: 1.25, color: "#0e0d12" }}>
-            <span className="capsule-green">See</span> how we can <br />
+        {/* RIGHT: Text Column */}
+        <div className="features-progress-text">
+          <h2
+            style={{
+              fontSize: "clamp(1.6rem, 3.2vw, 2.5rem)",
+              marginBottom: "20px",
+              letterSpacing: "-0.5px",
+              lineHeight: 1.22,
+              color: "#0e0d12",
+              fontFamily: "var(--font-heading)",
+            }}
+          >
+            <span className="capsule-green">See</span>{" "}how we can{" "}<br />
             help you{" "}
             <span className="highlight-container">
               progress
               <YellowUnderline />
             </span>
           </h2>
-          <p style={{ color: "#6b6873", fontSize: "0.93rem", lineHeight: 1.75, marginBottom: "36px", maxWidth: "400px" }}>
-            We add a layer of fearless insights and action that allows change makers to accelerate their progress in areas such as brand, design, digital, comms and social research.
+          <p
+            style={{
+              color: "#6b6873",
+              fontSize: "0.88rem",
+              lineHeight: 1.75,
+              marginBottom: "28px",
+              maxWidth: "360px",
+            }}
+          >
+            We add a layer of fearless insights and action that allows change
+            makers to accelerate their progress in areas such as brand, design,
+            digital, comms and social research.
           </p>
           <a href="#" id="progress-read-more" className="read-more-link">
             Read more <ThinArrowRight />
@@ -514,96 +612,117 @@ function OffersSection() {
 
 /* ── Testimonials Section ────────────────────────────────────────────────── */
 function TestimonialsSection() {
-  // Avatar layout precisely matching screenshot:
-  // LEFT: small (top), small (mid-left), LARGE (bottom-left)
-  // RIGHT: small-med (top), medium (mid), medium (lower), LARGE partial (bottom-right)
+  // Avatar positions derived from Figma 1920px canvas, converted to percentages.
+  // Section total height: 653px in Figma.
   const surroundingAvatars = [
     // LEFT COLUMN
-    { cls: "ta-1", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150&q=80",   alt: "Customer 1" }, // small top-left
-    { cls: "ta-2", img: "https://images.unsplash.com/photo-1528763380143-65b3ac89a3ff?auto=format&fit=crop&w=100&h=100&q=80",  alt: "Customer 2" }, // small mid-left
-    { cls: "ta-3", img: "https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&w=300&h=300&q=80",  alt: "Customer 3" }, // LARGE lower-left
-    // RIGHT COLUMN
-    { cls: "ta-4", img: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&h=150&q=80",  alt: "Customer 4" }, // small upper-right
-    { cls: "ta-5", img: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=150&h=150&q=80",   alt: "Customer 5" }, // medium mid-right
-    { cls: "ta-6", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&q=80",  alt: "Customer 6" }, // medium lower-right
-    { cls: "ta-7", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=400&q=80",  alt: "Customer 7" }, // LARGE bottom-right partial
+    { id: "L1", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150&q=80", alt: "Customer 1", style: { left: "11.45%", top: "10px",  width: "120px", height: "120px" } },
+    { id: "L2", img: "https://images.unsplash.com/photo-1528763380143-65b3ac89a3ff?auto=format&fit=crop&w=100&h=100&q=80", alt: "Customer 2", style: { left: "1.98%",  top: "220px", width:  "60px",  height:  "60px" } },
+    { id: "L3", img: "https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&w=300&h=300&q=80", alt: "Customer 3", style: { left: "8.96%",  top: "240px", width: "200px", height: "200px" } },
+    { id: "L4", img: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&h=150&q=80", alt: "Customer 4", style: { left: "2.97%",  top: "450px", width: "100px", height: "100px" } },
+    // RIGHT COLUMN — percentages from Figma 1920px: left/1920*100
+    { id: "R1", img: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=150&h=150&q=80", alt: "Customer 5", style: { right: "5%",  top:  "10px",  width: "120px", height: "120px" } },  // ~1670px left
+    { id: "R2", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80", alt: "Customer 6", style: { right: "18.33%", top:  "83px",  width:  "90px",  height:  "90px" } }, // Ellipse 264: left 1478px → right 18.33%
+    { id: "R3", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80", alt: "Customer 7", style: { right: "16.04%", top: "236px", width: "112px", height: "112px" } }, // Ellipse 265: exactly 112×112
+    { id: "R4", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&h=300&q=80", alt: "Customer 8", style: { right: "1.98%",  top: "358px", width: "295px", height: "295px" } }, // Ellipse 269: exactly 295×295
   ];
 
   return (
-    <section id="testimonials" style={{ padding: "90px 0 110px" }}>
-      <div className="container" style={{ textAlign: "center" }}>
-        <h2 style={{ fontSize: "clamp(1.8rem, 4.5vw, 2.7rem)", marginBottom: "70px", letterSpacing: "-0.8px", color: "#0e0d12", lineHeight: 1.3 }}>
-          <span className="capsule-green">What</span> our customer <br />
-          <span className="highlight-container">
-            says
-            <YellowUnderline />
-          </span>{" "}
-          <span className="highlight-container">
-            About Us
-            <div className="thick-underline" />
-          </span>
-        </h2>
+    <section id="testimonials" style={{ 
+      position: "relative", 
+      width: "100%",
+      height: "680px",
+      margin: "100px 0",
+      padding: "0",
+      overflow: "visible" 
+    }}>
+      
+      {/* Testimonials Heading — centered like Figma (left:608/1920 ≈ 31.7%, width:685/1920 ≈ 35.7%) */}
+      <h2 style={{ 
+        position: "absolute",
+        top: "0px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "685px",
+        maxWidth: "80%",
+        fontSize: "clamp(1.8rem, 4.5vw, 2.7rem)", 
+        letterSpacing: "-0.8px", 
+        color: "#0e0d12", 
+        lineHeight: 1.3,
+        textAlign: "center",
+        margin: "0"
+      }}>
+        <span className="capsule-green">What</span> our customer <br />
+        <span className="highlight-container">
+          says
+          <YellowUnderline />
+        </span>{" "}
+        <span className="highlight-container">
+          About Us
+          <YellowUnderline />
+        </span>
+      </h2>
 
-        {/* Testimonial Card with Surrounding Avatars */}
-        <div className="testimonial-wrapper">
-          {surroundingAvatars.map(({ cls, img, alt }) => (
-            <div key={cls} className={`t-avatar ${cls}`}>
-              <img src={img} alt={alt} />
-            </div>
-          ))}
+      {/* Floating Avatars */}
+      {surroundingAvatars.map((avatar) => (
+        <div key={avatar.id} className="t-avatar" style={avatar.style}>
+          <img src={avatar.img} alt={avatar.alt} />
+        </div>
+      ))}
 
-          {/* Central Quote Box — mint/green tinted background matching Figma */}
-          <div id="testimonial-card" style={{
-            position: "relative",
-            zIndex: 2,
-            backgroundColor: "#eef8f2",
-            border: "none",
-            borderRadius: "28px",
-            padding: "48px 56px",
-            maxWidth: "480px",
-            margin: "0 auto",
-            textAlign: "center",
-          }}>
-            {/* Large open quote mark — top left */}
-            <div style={{
-              position: "absolute",
-              top: "22px",
-              left: "28px",
-              fontSize: "5rem",
-              lineHeight: 1,
-              color: "#b8d4c0",
-              fontFamily: "Georgia, serif",
-              fontWeight: 700,
-              userSelect: "none",
-            }} aria-hidden="true">
-              &ldquo;
-            </div>
+      {/* Central Quote Box — Figma left:560, width:685 on 1920px → left:29%, width:35.7% */}
+      <div id="testimonial-card" style={{
+        position: "absolute",
+        top: "180px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "min(685px, 55%)",
+        zIndex: 2,
+        backgroundColor: "#eef8f2",
+        border: "none",
+        borderRadius: "28px",
+        padding: "48px 56px",
+        textAlign: "center",
+        boxSizing: "border-box"
+      }}>
+        {/* Large open quote mark — top left */}
+        <div style={{
+          position: "absolute",
+          top: "22px",
+          left: "28px",
+          fontSize: "5rem",
+          lineHeight: 1,
+          color: "#b8d4c0",
+          fontFamily: "Georgia, serif",
+          fontWeight: 700,
+          userSelect: "none",
+        }} aria-hidden="true">
+          &ldquo;
+        </div>
 
-            <p style={{ color: "#3a3840", fontSize: "0.9rem", lineHeight: 1.9, textAlign: "center", padding: "28px 8px 0" }}>
-              Elementum  delivered the site with inthe timeline
-              as they requested. Inthe end, the client found a 50%
-              increase in traffic with in days since its launch. They
-              also had an impressive ability to use technologies that
-              the company hasnt used, which have also proved to
-              be easy to use and reliable
-            </p>
+        <p style={{ color: "#3a3840", fontSize: "0.9rem", lineHeight: 1.9, textAlign: "center", padding: "28px 8px 0" }}>
+          Elementum delivered the site with inthe timeline
+          as they requested. Inthe end, the client found a 50%
+          increase in traffic with in days since its launch. They
+          also had an impressive ability to use technologies that
+          the company hasnt used, which have also proved to
+          be easy to use and reliable
+        </p>
 
-            {/* Large close quote mark — bottom right */}
-            <div style={{
-              position: "absolute",
-              bottom: "12px",
-              right: "28px",
-              fontSize: "5rem",
-              lineHeight: 1,
-              color: "#b8d4c0",
-              fontFamily: "Georgia, serif",
-              fontWeight: 700,
-              userSelect: "none",
-              transform: "rotate(180deg)",
-            }} aria-hidden="true">
-              &ldquo;
-            </div>
-          </div>
+        {/* Large close quote mark — bottom right */}
+        <div style={{
+          position: "absolute",
+          bottom: "12px",
+          right: "28px",
+          fontSize: "5rem",
+          lineHeight: 1,
+          color: "#b8d4c0",
+          fontFamily: "Georgia, serif",
+          fontWeight: 700,
+          userSelect: "none",
+          transform: "rotate(180deg)",
+        }} aria-hidden="true">
+          &ldquo;
         </div>
       </div>
     </section>
@@ -612,14 +731,6 @@ function TestimonialsSection() {
 
 /* ── Newsletter Section ──────────────────────────────────────────────────── */
 function NewsletterSection() {
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email) setSubscribed(true);
-  };
-
   return (
     <section id="newsletter" style={{ backgroundColor: "#d8ede2", padding: "100px 0 90px", position: "relative", overflow: "hidden" }}>
 
@@ -645,8 +756,24 @@ function NewsletterSection() {
         <path d="M 82 105 L 70 92 M 82 105 L 95 96" stroke="#e8325a" strokeWidth="2.2" strokeLinecap="round" fill="none" />
       </svg>
 
-      {/* Purple quarter-circle at bottom-right */}
-      <div className="purple-quarter-circle" aria-hidden="true" />
+      {/* Purple ellipse — Figma exact: 244×244px, #934CEC, rotation: -120°, Left:1622 on 1920px canvas */}
+      {/* On 1920px: right edge = 1920-(1622+244) = 54px from right */}
+      <div
+        className="purple-ellipse-newsletter"
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "90px",
+          right: "54px",
+          width: "244px",
+          height: "244px",
+          background: "linear-gradient(90deg, #934CEC 50%, transparent 50%)",
+          borderRadius: "50%",
+          transform: "rotate(-120deg)",
+          zIndex: 1,
+          pointerEvents: "none",
+        }}
+      />
 
       <div className="container" style={{ textAlign: "center", position: "relative", zIndex: 5 }}>
         <h2 id="newsletter-heading" style={{ fontSize: "clamp(2rem, 5vw, 3.6rem)", marginBottom: "16px", letterSpacing: "-1px", color: "#0e0d12", fontFamily: "var(--font-heading)" }}>
@@ -657,43 +784,13 @@ function NewsletterSection() {
           To make your stay special and even more memorable
         </p>
 
-        {subscribed ? (
-          <div role="status" style={{ color: "#1a5235", fontWeight: "600", fontSize: "1.1rem", padding: "16px" }}>
-            🎉 Thank you for subscribing!
-          </div>
-        ) : (
-          <form
-            id="newsletter-form"
-            onSubmit={handleSubscribe}
-            style={{ display: "flex", justifyContent: "center", gap: "12px", maxWidth: "440px", margin: "0 auto", flexWrap: "wrap" }}
-          >
-            <input
-              id="newsletter-email"
-              type="email"
-              placeholder="Your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              style={{
-                padding: "16px 24px",
-                borderRadius: "9999px",
-                border: "1.5px solid #b9d8bf",
-                fontSize: "0.9rem",
-                width: "100%",
-                outline: "none",
-                backgroundColor: "rgba(255,255,255,0.75)",
-                color: "#0e0d12",
-                fontFamily: "var(--font-body)",
-                transition: "border-color 0.2s",
-              }}
-              onFocus={(e) => (e.target.style.borderColor = "#6cbf7a")}
-              onBlur={(e) => (e.target.style.borderColor = "#b9d8bf")}
-            />
-            <button id="newsletter-submit" type="submit" className="btn-black" style={{ width: "100%", marginTop: "8px" }}>
-              Subscribe now
-            </button>
-          </form>
-        )}
+        <button
+          id="newsletter-submit"
+          className="btn-black"
+          style={{ marginTop: "0" }}
+        >
+          Subscribe Now
+        </button>
       </div>
     </section>
   );
@@ -701,55 +798,52 @@ function NewsletterSection() {
 
 /* ── Footer ──────────────────────────────────────────────────────────────── */
 function Footer() {
-  const columns = [
-    {
-      title: "Company",
-      links: ["Home", "Studio", "Service", "Blog"],
-    },
-    {
-      title: "Terms & Policies",
-      links: ["Privacy Policy", "Terms & Conditions", "License", "Accessibility"],
-    },
-    {
-      title: "Follow Us",
-      links: ["Instagram", "LinkedIn", "YouTube", "Twitter"],
-    },
-  ];
-
   return (
     <footer id="contact" style={{ backgroundColor: "#daf1e3", borderTop: "1px solid #c6d9cb", padding: "64px 0 32px" }}>
       <div className="container">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "40px 24px", marginBottom: "60px" }}>
-          {/* Link columns */}
-          {columns.map((col) => (
-            <div key={col.title}>
-              <h4 style={{ fontSize: "0.85rem", fontWeight: "700", color: "#0e0d12", marginBottom: "22px", textTransform: "capitalize" }}>
-                {col.title}
-              </h4>
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "13px" }}>
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="footer-link"
-                      id={`footer-${link.toLowerCase().replace(/\s+/g, "-").replace(/&/g, "and")}`}
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        {/* Divider line above footer columns */}
+        <div style={{ borderTop: "1px solid #0e0d12", marginBottom: "60px" }} />
 
-          {/* Contact column */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "40px 24px", marginBottom: "60px" }}>
+          {/* Company column */}
           <div>
-            <h4 style={{ fontSize: "0.85rem", fontWeight: "700", color: "#0e0d12", marginBottom: "22px", textTransform: "capitalize" }}>
-              Terms & Policies
-            </h4>
+            <h4 style={{ fontSize: "0.85rem", fontWeight: "700", color: "#0e0d12", marginBottom: "22px", fontFamily: "var(--font-heading)" }}>Company</h4>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "13px" }}>
+              <li><a href="#" className="footer-link" id="footer-home">Home</a></li>
+              <li><a href="#" className="footer-link" id="footer-studio">Studio</a></li>
+              <li><a href="#" className="footer-link" id="footer-service">Service</a></li>
+              <li><a href="#" className="footer-link" id="footer-blog">Blog</a></li>
+            </ul>
+          </div>
+
+          {/* Terms & Policies column */}
+          <div>
+            <h4 style={{ fontSize: "0.85rem", fontWeight: "700", color: "#0e0d12", marginBottom: "22px", fontFamily: "var(--font-heading)" }}>Terms & Policies</h4>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "13px" }}>
+              <li><a href="#" className="footer-link" id="footer-privacy">Privacy Policy</a></li>
+              <li><a href="#" className="footer-link" id="footer-terms">Terms & Conditions</a></li>
+              <li><a href="#" className="footer-link" id="footer-explore">Explore</a></li>
+              <li><a href="#" className="footer-link" id="footer-accessibility">Accessibility</a></li>
+            </ul>
+          </div>
+
+          {/* Follow Us column */}
+          <div>
+            <h4 style={{ fontSize: "0.85rem", fontWeight: "700", color: "#0e0d12", marginBottom: "22px", fontFamily: "var(--font-heading)" }}>Follow Us</h4>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "13px" }}>
+              <li><a href="#" className="footer-link" id="footer-instagram">Instagram</a></li>
+              <li><a href="#" className="footer-link" id="footer-linkedin">LinkedIn</a></li>
+              <li><a href="#" className="footer-link" id="footer-youtube">YouTube</a></li>
+              <li><a href="#" className="footer-link" id="footer-twitter">Twitter</a></li>
+            </ul>
+          </div>
+
+          {/* Terms & Policies / Contact column */}
+          <div>
+            <h4 style={{ fontSize: "0.85rem", fontWeight: "700", color: "#0e0d12", marginBottom: "22px", fontFamily: "var(--font-heading)" }}>Terms & Policies</h4>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px", fontSize: "0.84rem", color: "#4d6154" }}>
-              <p style={{ lineHeight: 1.6 }}>1699a Fluss av, STE 2D<br />Chicago, IL 43867</p>
-              <p>(123) 4567891000</p>
+              <p style={{ lineHeight: 1.6 }}>1498w Fluton ste, STE<br/>2D Chicgo, IL 63867</p>
+              <p>(216) 3179580</p>
               <a href="mailto:info@elementum.com" className="footer-link" id="footer-email">
                 info@elementum.com
               </a>
@@ -758,9 +852,9 @@ function Footer() {
         </div>
 
         {/* Copyright */}
-        <div style={{ borderTop: "1px solid #c0d4c5", paddingTop: "26px", display: "flex", justifyContent: "center" }}>
+        <div style={{ paddingTop: "26px", display: "flex", justifyContent: "center" }}>
           <p style={{ fontSize: "0.78rem", color: "#7a9080" }}>
-            ©2021 Elementum. All rights reserved.
+            ©2023 Elementum. All rights reserved.
           </p>
         </div>
       </div>
@@ -773,25 +867,66 @@ export default function App() {
   return (
     <>
       <Navbar />
-
-      {/* Global decorative squiggles between sections */}
-      <div style={{ position: "fixed", pointerEvents: "none", inset: 0, zIndex: 0, overflow: "hidden" }} aria-hidden="true">
+ 
+      <main style={{ position: "relative", zIndex: 1, overflow: "hidden" }}>
+        {/* Global decorative squiggles between sections — now scrolling with the page */}
         <SquigglePath1 />
         <SquigglePath2 />
         <SquigglePath3 />
-      </div>
 
-      <main style={{ position: "relative", zIndex: 1 }}>
         <HeroSection />
-        <TomorrowSection />
-        <ProgressSection />
+ 
+        {/* Features: Tomorrow + Progress — Figma vertical gap 170px, left 160px */}
+        <div
+          id="features"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "170px",
+            padding: "80px 0 100px",
+            position: "relative",
+            width: "100%",
+            maxWidth: "1600px",
+            margin: "0 auto",
+          }}
+        >
+          {/* Figma Vector 2516: red wavy connector between Tomorrow and Progress */}
+          <svg
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: "450px",
+              left: "150px",
+              width: "1100px",
+              height: "400px",
+              pointerEvents: "none",
+              zIndex: 0,
+              overflow: "visible",
+            }}
+            viewBox="0 0 1100 400"
+            fill="none"
+            className="connector-line"
+          >
+            <path
+              d="M 950 10 Q 750 150, 550 180 T 150 380"
+              stroke="#E8325A"
+              strokeWidth="2"
+              strokeLinecap="round"
+              fill="none"
+            />
+          </svg>
+ 
+          <TomorrowSection />
+          <ProgressSection />
+        </div>
+ 
         <OffersSection />
         <TestimonialsSection />
         <NewsletterSection />
       </main>
-
+ 
       <Footer />
-
+ 
       {/* Inline CSS for absolute/responsive rules */}
       <style>{`
         /* ── Nav Link ── */
@@ -808,16 +943,14 @@ export default function App() {
         /* ── Purple ellipse in Hero (Figma Ellipse 736: 155.76×155.76px, #934CEC) ── */
         .purple-ellipse-hero {
           position: absolute;
-          right: -8px;
-          top: 100px;
+          right: -77.88px;
+          top: 270px;
           width: 155.76px;
           height: 155.76px;
-          background-color: #934CEC;
+          background: linear-gradient(90deg, #934CEC 50%, transparent 50%);
           border-radius: 50%;
-          transform: rotate(60deg);
           z-index: 1;
           pointer-events: none;
-          opacity: 0.9;
         }
 
         /* ── Hero avatar layout ── */
@@ -843,13 +976,105 @@ export default function App() {
           z-index: 20;
         }
 
+        /* ── Features sections (Tomorrow + Progress) exact Figma sizes ── */
+        .features-section-tomorrow {
+          min-height: 600px;
+          display: flex;
+          align-items: center;
+          position: relative;
+          z-index: 1;
+        }
+        .features-section-progress {
+          min-height: 600px;
+          display: flex;
+          align-items: center;
+          position: relative;
+          z-index: 1;
+        }
+
+        .connector-line {
+          display: block;
+        }
+        @media (max-width: 991px) {
+          .connector-line {
+            display: none !important;
+          }
+        }
+
+        /* ── Tomorrow & Progress Sections layout (Figma specs) ── */
+        .features-tomorrow-container {
+          display: flex;
+          align-items: center;
+          gap: 262px;
+          width: 100%;
+          max-width: 1600px;
+          margin: 0 auto;
+        }
+        .features-tomorrow-text {
+          flex: 0 0 auto;
+          width: 737px;
+          padding-left: 160px;
+          box-sizing: border-box;
+        }
+        .features-tomorrow-image-wrap {
+          flex: 0 0 auto;
+          width: 600px;
+          height: 600px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+        }
+        .features-tomorrow-image {
+          width: 600px;
+          height: 600px;
+        }
+
+        .features-progress-container {
+          display: flex;
+          align-items: center;
+          gap: 290px;
+          width: 100%;
+          max-width: 1600px;
+          margin: 0 auto;
+        }
+        .features-progress-image-wrap {
+          flex: 0 0 auto;
+          width: 600px;
+          height: 600px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+        }
+        .features-progress-image {
+          width: 600px;
+          height: 600px;
+        }
+        .features-progress-text {
+          flex: 0 0 auto;
+          width: 706px;
+          box-sizing: border-box;
+        }
+
+        /* Rotated red rectangle on top-right of Tomorrow circle */
+        .red-rect-tomorrow {
+          position: absolute;
+          right: -10px;
+          top: -15px;
+          width: 160px;
+          height: 160px;
+          background-color: #FF7171;
+          transform: rotate(15deg);
+          z-index: 1;
+          pointer-events: none;
+        }
+
         /* ── Shared circle image wrapper ── */
         .circle-img-wrap {
           position: relative;
           z-index: 2;
-          width: 320px;
-          height: 320px;
-          border-radius: 50%;
+          border-radius: 500px; /* Figma: Radius: 500px */
           overflow: hidden;
           border: 5px solid #ffffff;
           box-shadow: 0 20px 56px rgba(0,0,0,0.12);
@@ -867,17 +1092,6 @@ export default function App() {
           filter: blur(28px);
           z-index: 1;
           pointer-events: none;
-        }
-        .red-triangle-tomorrow {
-          position: absolute;
-          right: -20px;
-          top: -30px;
-          width: 274px;
-          height: 267px;
-          z-index: 1;
-          transform: rotate(12deg);
-          pointer-events: none;
-          opacity: 0.9;
         }
 
         /* ── Progress section decorations ── */
@@ -934,12 +1148,6 @@ export default function App() {
         }
 
         /* ── Testimonial wrapper ── */
-        .testimonial-wrapper {
-          position: relative;
-          padding: 50px 0;
-          max-width: 920px;
-          margin: 0 auto;
-        }
         .t-avatar {
           position: absolute;
           border-radius: 50%;
@@ -950,18 +1158,6 @@ export default function App() {
         }
         .t-avatar:hover { transform: scale(1.1); z-index: 10; }
         .t-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Avatar positions — matching screenshot precisely */
-        /* LEFT: small top, small mid, LARGE lower */
-        .ta-1 { left: 7%;   top: 20px;  width: 62px;  height: 62px; }
-        .ta-2 { left: 1%;   top: 145px; width: 50px;  height: 50px; }
-        .ta-3 { left: 5%;   top: 230px; width: 175px; height: 175px; }
-        /* RIGHT: small top, medium mid, medium lower, LARGE partial bottom-right */
-        .ta-4 { right: 14%; top: 30px;  width: 58px;  height: 58px; }
-        .ta-5 { right: 6%;  top: 15px;  width: 75px;  height: 75px; }
-        .ta-6 { right: 8%;  top: 150px; width: 65px;  height: 65px; }
-        .ta-7 { right: -2%; top: 230px; width: 165px; height: 165px; }
-
         /* ── Newsletter red hand-drawn arrows ── */
         .newsletter-red-arrows {
           position: absolute;
@@ -1000,10 +1196,98 @@ export default function App() {
           .hamburger-only { display: none !important; }
         }
 
+        @media (max-width: 1599px) and (min-width: 992px) {
+          .features-tomorrow-container {
+            gap: 16.3vw;
+          }
+          .features-tomorrow-text {
+            width: 46vw;
+            padding-left: 10vw;
+          }
+          .features-tomorrow-image-wrap,
+          .features-tomorrow-image {
+            width: 37.5vw;
+            height: 37.5vw;
+          }
+          .red-rect-tomorrow {
+            width: 10vw;
+            height: 10vw;
+            right: -1vw;
+            top: -1vw;
+          }
+
+          .features-progress-container {
+            gap: 18.1vw;
+          }
+          .features-progress-image-wrap,
+          .features-progress-image {
+            width: 37.5vw;
+            height: 37.5vw;
+          }
+          .features-progress-text {
+            width: 44.1vw;
+          }
+          .triangle-progress-1 {
+            width: 11.25vw;
+            height: 11vw;
+            left: -2.5vw;
+            top: -3vw;
+          }
+          .triangle-progress-2 {
+            width: 17vw;
+            height: 16.6vw;
+            right: -2vw;
+            bottom: -2.5vw;
+          }
+        }
+
         @media (max-width: 991px) {
           .desktop-menu { display: none !important; }
           .t-avatar { display: none; }
           .purple-ellipse-hero { width: 100px; height: 100px; right: 6px; top: 120px; }
+          
+          .features-tomorrow-container,
+          .features-progress-container {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center;
+            gap: 48px;
+            padding: 0 32px;
+          }
+          .features-tomorrow-text,
+          .features-progress-text {
+            width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          .features-tomorrow-image-wrap,
+          .features-tomorrow-image,
+          .features-progress-image-wrap,
+          .features-progress-image {
+            width: 320px;
+            height: 320px;
+          }
+          .red-rect-tomorrow {
+            width: 90px;
+            height: 90px;
+            right: -5px;
+            top: -10px;
+          }
+          .triangle-progress-1 {
+            width: 100px;
+            height: 98px;
+            left: -20px;
+            top: -25px;
+          }
+          .triangle-progress-2 {
+            width: 150px;
+            height: 146px;
+            right: -15px;
+            bottom: -20px;
+          }
         }
 
         @media (max-width: 768px) {
@@ -1021,24 +1305,64 @@ export default function App() {
             width: 72px !important;
             height: 72px !important;
           }
-          .circle-img-wrap {
-            width: 240px;
-            height: 240px;
-          }
           .purple-ellipse-hero { display: none; }
-          .red-triangle-tomorrow { width: 160px; height: 160px; }
-          .triangle-progress-1 { width: 110px; height: 110px; }
-          .triangle-progress-2 { width: 160px; height: 160px; }
           .purple-quarter-circle { width: 90px; height: 90px; border-radius: 90px 0 0 0; }
           .newsletter-red-arrows { transform: translateX(-100px) scale(0.8); }
           #testimonial-card { padding: 32px 24px; }
+          
+          /* Collapse gaps and sections on mobile */
+          .features-tomorrow-container,
+          .features-progress-container {
+            gap: 48px;
+          }
+          #features { gap: 60px !important; }
+          .features-section-tomorrow,
+          .features-section-progress { min-height: auto; }
+          
+          .features-tomorrow-image-wrap,
+          .features-tomorrow-image,
+          .features-progress-image-wrap,
+          .features-progress-image {
+            width: 240px;
+            height: 240px;
+          }
+          .red-rect-tomorrow {
+            width: 70px;
+            height: 70px;
+            right: -5px;
+            top: -5px;
+          }
+          .triangle-progress-1 {
+            width: 70px;
+            height: 68px;
+            left: -15px;
+            top: -15px;
+          }
+          .triangle-progress-2 {
+            width: 100px;
+            height: 98px;
+            right: -10px;
+            bottom: -15px;
+          }
         }
 
         @media (max-width: 576px) {
           .service-row { flex-direction: column; align-items: flex-start; gap: 10px; }
           .service-row > div { width: 100% !important; }
           .service-row > div:last-child { justify-content: flex-start !important; }
-          .circle-img-wrap { width: 200px; height: 200px; }
+          
+          .features-tomorrow-container,
+          .features-progress-container {
+            gap: 32px;
+            padding: 0 18px;
+          }
+          .features-tomorrow-image-wrap,
+          .features-tomorrow-image,
+          .features-progress-image-wrap,
+          .features-progress-image {
+            width: 200px;
+            height: 200px;
+          }
         }
       `}</style>
     </>
